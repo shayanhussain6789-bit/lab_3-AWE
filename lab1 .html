@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DOM & BOM Manipulation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      transition: background-color 0.5s ease;
+    }
+    button {
+      margin: 5px;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="main-heading">Welcome to My Page</h1>
+  <p id="main-paragraph">This is a sample paragraph.</p>
+  <p id="date-time"></p>
+  <p id="browser-info"></p>
+
+  <!-- DOM Buttons -->
+  <button onclick="changeText()">Change Text Content</button>
+  <button onclick="changeBackgroundColor()">Change Background Color</button>
+  <button onclick="showDateTime()">Show Current Date & Time</button>
+
+  <!-- BOM Buttons -->
+  <button onclick="openNewWindow()">Open New Window</button>
+  <button onclick="closeNewWindow()">Close Opened Window</button>
+  <button onclick="showBrowserInfo()">Show Browser Information</button>
+  <button onclick="goBack()">Go Back</button>
+  <button onclick="goForward()">Go Forward</button>
+
+  <script>
+    // DOM Manipulation
+    function changeText() {
+      document.getElementById("main-heading").textContent = "Text Changed!";
+      document.getElementById("main-paragraph").textContent = "The paragraph has been updated.";
+    }
+
+    function changeBackgroundColor() {
+      const randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+      document.body.style.backgroundColor = randomColor;
+    }
+
+    function showDateTime() {
+      const now = new Date();
+      document.getElementById("date-time").textContent = "Current Date & Time: " + now.toString();
+    }
+
+    // BOM Manipulation
+    let newWindow;
+
+    function openNewWindow() {
+      newWindow = window.open("https://www.google.com", "_blank", "width=800,height=600");
+    }
+
+    function closeNewWindow() {
+      if (newWindow && !newWindow.closed) {
+        newWindow.close();
+      } else {
+        alert("No window to close or it's already closed.");
+      }
+    }
+
+    function showBrowserInfo() {
+      const info = `
+        Screen Width: ${screen.width}px
+        Screen Height: ${screen.height}px
+        User Agent: ${navigator.userAgent}
+      `;
+      document.getElementById("browser-info").textContent = info;
+    }
+
+    function goBack() {
+      history.back();
+    }
+
+    function goForward() {
+      history.forward();
+    }
+  </script>
+
+</body>
+</html>
